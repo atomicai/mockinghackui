@@ -1,30 +1,34 @@
 import { useState } from 'react'
+import { useAtom } from 'jotai'
 import axios from 'axios'
 
+import { atomTaxpayerID } from '../context'
+
 const Search = () => {
-  const [number, setNumber] = useState('')
-  const [isValidNumber, setIsValidNumber] = useState(false)
+  const [taxpayerID, setTaxpayerID] = useAtom(atomTaxpayerID)
+  const [isValidTaxpayerID, setIsValidTaxpayerID] = useState(false)
+
 
   const validate = (e) => {
     const intermediate = new RegExp('^\\d{0,9}$')
     const complete = new RegExp('^\\d{9}$')
 
     if (intermediate.test(e.target.value)) {
-      setNumber(e.target.value)
-      setIsValidNumber(complete.test(e.target.value))
+      setTaxpayerID(e.target.value)
+      setIsValidTaxpayerID(complete.test(e.target.value))
     }
   }
 
   const auth = async (e) => {
     e.preventDefault()
-    if (isValidNumber) {
+    if (isValidTaxpayerID) {
       const api = axios.create({
         baseURL: 'http://localhost:3000'
       })
 
       try {
         const response = await api.post('/login', {
-          inn: number
+          inn: taxpayerID
         })
         if (response.data.is_ok) {
           console.log('Success')
@@ -42,11 +46,11 @@ const Search = () => {
       >
         <input
           className="w-[200px] h-[60px] p-6 border-black border text-3xl"
-          value={number}
+          value={taxpayerID}
           onChange={(e) => validate(e)}
           type="text"
         />
-        {isValidNumber && (
+        {isValidTaxpayerID && (
           <button className="py-2 px-4 border-black border rounded text-3xl">
             Показать
           </button>
