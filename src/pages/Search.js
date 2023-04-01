@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAtom } from 'jotai'
 import axios from 'axios'
@@ -8,6 +9,7 @@ const Search = () => {
   const [taxpayerID, setTaxpayerID] = useAtom(atomTaxpayerID)
   const [isValidTaxpayerID, setIsValidTaxpayerID] = useState(false)
 
+  const navigate = useNavigate()
 
   const validate = (e) => {
     const intermediate = new RegExp('^\\d{0,9}$')
@@ -30,8 +32,8 @@ const Search = () => {
         const response = await api.post('/login', {
           inn: taxpayerID
         })
+        navigate('/dashboard')
         if (response.data.is_ok) {
-          console.log('Success')
         }
       } catch (error) {}
     }

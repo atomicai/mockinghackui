@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import Root from './pages/Root'
 import Search from './pages/Search'
+import Dashboard from './pages/Dashboard'
 import Error from './pages/Error'
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: 'search',
         element: <Search />
+      },
+      {
+        path: 'dashboard',
+        element: <Dashboard />
       }
     ]
   }
