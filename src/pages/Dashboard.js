@@ -2,8 +2,7 @@ import { useAtom } from 'jotai'
 
 import { atomTaxpayerID } from '../context'
 
-import AveragePrice from '../components/AveragePrice'
-
+import { AveragePrice } from '../components/AveragePrice'
 import { ConversionRate } from '../components/ConversionRate'
 
 const Dashboard = () => {
@@ -19,7 +18,7 @@ const Dashboard = () => {
             : `Аналитика для ${taxpayerID}`}
         </h1>
 
-        <AveragePrice />
+        <AveragePrice id={taxpayerID} />
 
         <ConversionRate id={taxpayerID} />
       </main>
