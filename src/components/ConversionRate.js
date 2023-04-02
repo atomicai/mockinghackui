@@ -6,10 +6,10 @@ export const ConversionRate = (id) => {
 
   useEffect(() => {
     const fetchConversionRate = async () => {
-      if (id) {
+      if (id === '') {
         try {
           const response = await api.post('/conversionrate', {
-            supplier_id: id
+            supplier_inn: id
           })
           setConversionRate(response.data)
         } catch (error) {}
