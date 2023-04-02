@@ -22,7 +22,7 @@ export const AveragePrice = (id) => {
       }
     }
     fetchAveragePrice()
-  }, [])
+  }, [id])
 
   return <div>{averagePrice}</div>
 }
