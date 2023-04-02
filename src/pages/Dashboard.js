@@ -1,12 +1,10 @@
 import { useAtom } from 'jotai'
 
 import { atomTaxpayerID } from '../context'
-import CategoriesCharts from '../components/CategoriesCharts'
 
 import AveragePrice from '../components/AveragePrice'
 
 import { ConversionRate } from '../components/ConversionRate'
-
 
 const Dashboard = () => {
   const [taxpayerID] = useAtom(atomTaxpayerID)
@@ -14,13 +12,16 @@ const Dashboard = () => {
   return (
     <>
       <main className="h-screen flex flex-col items-center justify-top gap-16 p-4">
-        <h1 className="text-4xl">{`Аналитика для ${taxpayerID}`}</h1>
-        <CategoriesCharts />
+        <h1 className="text-4xl">
+          {' '}
+          {taxpayerID === ''
+            ? 'Общая аналитика'
+            : `Аналитика для ${taxpayerID}`}
+        </h1>
 
         <AveragePrice />
 
-        <ConversionRate />
-
+        <ConversionRate id={taxpayerID} />
       </main>
     </>
   )
