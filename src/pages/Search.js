@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAtom } from 'jotai'
-import axios from 'axios'
 
+import api from '../api'
 import { atomTaxpayerID } from '../context'
 
 const Search = () => {
@@ -28,10 +28,6 @@ const Search = () => {
   const auth = async (e) => {
     e.preventDefault()
     if (isValidTaxpayerID) {
-      const api = axios.create({
-        baseURL: 'http://localhost:3000'
-      })
-
       try {
         const response = await api.post('/login', {
           inn: taxpayerID

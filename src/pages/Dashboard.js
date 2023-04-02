@@ -3,6 +3,7 @@ import axios from 'axios'
 import Chart from 'react-apexcharts'
 import { uid } from 'uid'
 
+import api from '../api'
 import { atomTaxpayerID } from '../context'
 import { useEffect, useState } from 'react'
 
@@ -13,11 +14,7 @@ const Dashboard = () => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
-    const fetchCategory = async () => {
-      const api = axios.create({
-        baseURL: 'http://localhost:3000'
-      })
-
+    const fetchCategories = async () => {
       try {
         const response = await api.post(
           '/viewing_category_topk',
@@ -26,7 +23,7 @@ const Dashboard = () => {
         setCategories(response.data)
       } catch (error) {}
     }
-    fetchCategory()
+    fetchCategories()
   }, [])
 
   const categoriesMetrics = [
