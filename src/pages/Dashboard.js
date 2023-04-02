@@ -1,5 +1,4 @@
 import { useAtom } from 'jotai'
-import axios from 'axios'
 import Chart from 'react-apexcharts'
 import { uid } from 'uid'
 
@@ -40,7 +39,7 @@ const Dashboard = () => {
   ]
 
   const categoriesCharts = categoriesMetrics.map((categoriesMetric) => (
-    <div className="flex flex-col items-center justify-top gap-5" key={uid()}>
+    <div className="flex flex-col items-center justify-top gap-4" key={uid()}>
       <h2 className="text-2xl">{categoriesMetric.name}</h2>
       <Chart
         type="bar"
@@ -56,7 +55,7 @@ const Dashboard = () => {
             categories: categoriesMetric.x
           }
         }}
-        width="600"
+        width="500"
         height="400"
       />
     </div>
@@ -64,11 +63,9 @@ const Dashboard = () => {
 
   return (
     <>
-      <main className="h-screen flex flex-col items-center justify-top gap-20 p-10">
-        <h1 className="flex justify-center text-4xl">
-          {`Аналитика для ${taxpayerID}`}
-        </h1>
-        <div className="grid grid-cols-2 gap-40">{categoriesCharts}</div>
+      <main className="h-screen flex flex-col items-center justify-top gap-16 p-4">
+        <h1 className="text-4xl">{`Аналитика для ${taxpayerID}`}</h1>
+        <div className="grid grid-cols-2 gap-32">{categoriesCharts}</div>
       </main>
     </>
   )
