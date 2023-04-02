@@ -12,12 +12,16 @@ const Search = () => {
   const navigate = useNavigate()
 
   const validate = (e) => {
-    const intermediate = new RegExp('^\\d{0,9}$')
-    const complete = new RegExp('^\\d{9}$')
+    const intermediate = new RegExp('^\\d{0,12}$')
+    const completeNatural = new RegExp('^\\d{10}$')
+    const completeJuridical = new RegExp('^\\d{12}$')
 
     if (intermediate.test(e.target.value)) {
       setTaxpayerID(e.target.value)
-      setIsValidTaxpayerID(complete.test(e.target.value))
+      const isComplete =
+        completeNatural.test(e.target.value) ||
+        completeJuridical.test(e.target.value)
+      setIsValidTaxpayerID(isComplete)
     }
   }
 
@@ -47,7 +51,7 @@ const Search = () => {
         onSubmit={(e) => auth(e)}
       >
         <input
-          className="w-[200px] h-[60px] p-6 border-black border text-3xl"
+          className="w-[250px] h-[60px] p-6 border-black border text-3xl"
           value={taxpayerID}
           onChange={(e) => validate(e)}
           type="text"
