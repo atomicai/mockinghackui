@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAtom } from 'jotai'
-import axios from 'axios'
 
+import api from '../api'
 import { atomTaxpayerID } from '../context'
 
 const Search = () => {
@@ -28,10 +28,6 @@ const Search = () => {
   const auth = async (e) => {
     e.preventDefault()
     if (isValidTaxpayerID) {
-      const api = axios.create({
-        baseURL: 'http://localhost:3000'
-      })
-
       try {
         const response = await api.post('/login', {
           inn: taxpayerID
@@ -44,20 +40,20 @@ const Search = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center gap-10">
+    <div className="h-screen flex flex-col items-center justify-center gap-8">
       <h1 className="text-4xl">Введите ИНН</h1>
       <form
-        className="flex flex-col items-center justify-center gap-10"
+        className="h-[200px] flex flex-col items-center justify-top gap-8"
         onSubmit={(e) => auth(e)}
       >
         <input
-          className="w-[250px] h-[60px] p-6 border-black border text-3xl"
+          className="w-[250px] h-[60px] border-black border text-center text-3xl"
           value={taxpayerID}
           onChange={(e) => validate(e)}
           type="text"
         />
         {isValidTaxpayerID && (
-          <button className="py-2 px-4 border-black border rounded text-3xl">
+          <button className="px-8 py-4 border-black border rounded text-3xl hover:shadow-md">
             Показать
           </button>
         )}
