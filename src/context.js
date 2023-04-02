@@ -1,3 +1,3 @@
-import { atom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
 
-export const atomTaxpayerID = atom('')
+export const atomTaxpayerID = atomWithStorage('taxpayerID', '')

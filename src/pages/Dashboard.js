@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 
-import api from '../api'
 import { atomTaxpayerID } from '../context'
 import CategoriesCharts from '../components/CategoriesCharts'
 
